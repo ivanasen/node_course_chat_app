@@ -2,5 +2,11 @@
   "name": "node-chat-app",
   "version": "1.0.0",
   "main": "index.js",
-  "license": "MIT"
+  "scripts": {
+    "test": "export NODE_ENV=test || SET \"NODE_ENV=test\" && mocha server/**/*.test.js"    
+  },
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.15.3"
+  }
 }
