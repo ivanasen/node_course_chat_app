@@ -21,8 +21,8 @@ io.on('connection', (socket) => {
     });
 
     socket.on('createMessage', (message) => {
-        message.createdAt = new Date();
-        socket.emit('newMessage', message);
+        message.createdAt = new Date().getTime();
+        io.emit('newMessage', message);
     });
     
     socket.on('disconnect', () => {
