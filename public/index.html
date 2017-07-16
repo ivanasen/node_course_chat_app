@@ -1,14 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
 </head>
+
 <body>
-    <h1>Hello!</h1>
+    <script src="https://unpkg.com/vue@2.4.1"></script>
+    <h1>Welcome to the chat app!</h1>
+    <div id="chat">
+        <ol>
+            <li v-for="message in messages">
+                {{ message.from }}: {{ message.text }}
+            </li>
+        </ol>
+        <form id="message-form" v-on:submit.prevent="sendMessage">
+            <input type="text" name="message" placeholder="Type message..." v-model="messageInput">
+            <button type="submit">Send</button>
+        </form>
+    </div>
     <script src="/socket.io/socket.io.js"></script>
     <script src="./js/index.js"></script>
 </body>
+
 </html>
