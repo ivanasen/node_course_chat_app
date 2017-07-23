@@ -20,18 +20,23 @@
 
     <div id="chat" class="chat__main">
         <ol id="messages" class="chat__messages">
-            <ol>
-                <li v-for="message in messages">
-                    {{ message.from }} {{ message.createdAtFormatted }}:
+
+            <li v-for="message in messages" class="message">
+                <div class="message__title">
+                    <h4>
+                        {{ message.from }}
+                    </h4>
+                    <span>{{ message.createdAtFormatted }}</span>
+                </div>
+                <div class="message__body">
                     <span v-if="message.text">{{ message.text }}</span>
                     <span v-else><a target="_blank" :href="message.url">My current location</a></span>
-                </li>
-            </ol>
+                </div>
+            </li>
         </ol>
         <div class="chat__footer">
             <form id="message-form" v-on:submit.prevent="sendMessage">
-                <input type="text" name="message" placeholder="Type message..." v-model="messageInput" autocomplete="off"
-                    autofocus="on">
+                <input type="text" name="message" placeholder="Type message..." v-model="messageInput" autocomplete="off" autofocus="on">
                 <button type="submit">Send</button>
             </form>
             <button id="send-location-btn" @click="sendLocation" :disabled="isSendingLocation">Send Location</button>
