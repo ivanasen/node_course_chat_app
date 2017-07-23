@@ -13,13 +13,20 @@ new Vue({
     el: '#chat',
     data: {
         messageInput: '',
-        messages: []
+        messages: [],
+        isSendingLocation: false
     },
     mounted() {
         var self = this;
         socket.on('newMessage', function (message) {
+            message.createdAtFormatted = moment(message.createdAt).format('h:mm a');
             self.messages.push(message);
-            console.log(self.messages);
+        });
+
+        socket.on('newLocationMessage', function(message) {
+            message.createdAtFormatted = moment(message.createdAt).format('h:mm a');
+            self.messages.push(message);
+            self.isSendingLocation = false;
         });
     },
     methods: {
@@ -35,6 +42,18 @@ new Vue({
                 console.log(message);
             });
             this.messageInput = '';
+        },
+
+        sendLocation() {            
+            this.isSendingLocation = true;
+            navigator.geolocation.getCurrentPosition(function (location) {
+                socket.emit('createLocationMessage', {
+                    latitude: location.coords.latitude,
+                    longitude: location.coords.longitude
+                });
+            }, function () {
+                alert('Unable to fetch location');
+            });
         }
     }
 });
