@@ -9,6 +9,7 @@ socket.on('disconnect', function () {
     console.log('Disconnected from server');
 });
 
+// Vue.use(VueChatScroll);
 new Vue({
     el: '#chat',
     data: {

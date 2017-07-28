@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Chat | ChatApp</title>
+
+    <link rel="stylesheet" href="./css/styles.css">
+</head>
+
+<body class="chat">
+    <div class="chat__sidebar">
+        <h3>People</h3>
+        <div id="users"></div>
+    </div>
+
+    <div id="chat" class="chat__main">
+        <ol id="messages" class="chat__messages" v-chat-scroll="{always: false}">
+
+            <li v-for="message in messages" class="message">
+                <div class="message__title">
+                    <h4>
+                        {{ message.from }}
+                    </h4>
+                    <span>{{ message.createdAtFormatted }}</span>
+                </div>
+                <div class="message__body">
+                    <span v-if="message.text">{{ message.text }}</span>
+                    <span v-else><a target="_blank" :href="message.url">My current location</a></span>
+                </div>
+            </li>
+        </ol>
+        <div class="chat__footer">
+            <form id="message-form" v-on:submit.prevent="sendMessage">
+                <input type="text" name="message" placeholder="Type message..." v-model="messageInput" autocomplete="off" autofocus="on">
+                <button type="submit">Send</button>
+            </form>
+            <button id="send-location-btn" @click="sendLocation" :disabled="isSendingLocation">Send Location</button>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/vue@2.4.1"></script>
+    <script src="./js/libs/vue-chat-scroll.js"></script>
+    <script src="./socket.io/socket.io.js"></script>
+    <script src="./js/libs/moment.min.js"></script>
+    <script src="./js/chat.js"></script>
+</body>
+
+</html>

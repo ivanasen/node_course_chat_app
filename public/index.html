@@ -5,47 +5,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-
+    <title>Join | ChatApp</title>
     <link rel="stylesheet" href="./css/styles.css">
 </head>
 
-<body class="chat">
-    <script src="https://unpkg.com/vue@2.4.1"></script>
+<body class="centered-form">
 
-    <div class="chat__sidebar">
-        <h3>People</h3>
-        <div id="users"></div>
+    <div class="centered-form__form">
+        <form action="/chat.html">
+            <div class="form-field">
+                <h3>Join a Chat</h3>
+            </div>
+            <div class="form-field">
+                <label>Display name</label>
+                <input type="text" name="name" autofocus>
+            </div>
+            <div class="form-field">
+                <label>Room name</label>
+                <input type="text " name="room">
+            </div>
+            <div class="form-field">
+                <button>Join</button>
+            </div>
+            <div class="form-field"></div>
+            <div class="form-field"></div>
+        </form>
     </div>
-
-    <div id="chat" class="chat__main">
-        <ol id="messages" class="chat__messages">
-
-            <li v-for="message in messages" class="message">
-                <div class="message__title">
-                    <h4>
-                        {{ message.from }}
-                    </h4>
-                    <span>{{ message.createdAtFormatted }}</span>
-                </div>
-                <div class="message__body">
-                    <span v-if="message.text">{{ message.text }}</span>
-                    <span v-else><a target="_blank" :href="message.url">My current location</a></span>
-                </div>
-            </li>
-        </ol>
-        <div class="chat__footer">
-            <form id="message-form" v-on:submit.prevent="sendMessage">
-                <input type="text" name="message" placeholder="Type message..." v-model="messageInput" autocomplete="off" autofocus="on">
-                <button type="submit">Send</button>
-            </form>
-            <button id="send-location-btn" @click="sendLocation" :disabled="isSendingLocation">Send Location</button>
-        </div>
-    </div>
-
-    <script src="./socket.io/socket.io.js"></script>
-    <script src="./js/libs/moment.min.js"></script>
-    <script src="./js/index.js"></script>
 </body>
 
 </html>
