@@ -341,6 +341,10 @@ isarray@2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/isarray/-/isarray-2.0.1.tgz#a37d94ed9cda2d59865c9f76fe596ee1f338741e"
 
+jquery-deparam@^0.5.3:
+  version "0.5.3"
+  resolved "https://registry.yarnpkg.com/jquery-deparam/-/jquery-deparam-0.5.3.tgz#51f937c448175445499081b87bf32b241b1e2693"
+
 json3@3.3.2:
   version "3.3.2"
   resolved "https://registry.yarnpkg.com/json3/-/json3-3.3.2.tgz#3c0434743df93e2f5c42aee7b19bcb483575f4e1"
