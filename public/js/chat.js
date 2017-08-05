@@ -43,8 +43,7 @@ new Vue({
                 return;
             }
 
-            socket.emit('createMessage', {
-                from: 'Frank',
+            socket.emit('createMessage', {                
                 text: this.messageInput
             }, function (message) {
                 console.log(message);

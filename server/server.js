@@ -40,12 +40,21 @@ io.on('connection', (socket) => {
     });
 
     socket.on('createMessage', (message) => {
+        const user = users.get(socket.id);
+        if (user && isRealString(message.text)) {
+            io.to(user.room).emit('newMessage', new Message(user.name, message.text));
+        }
+
         message.createdAt = new Date().getTime();
         io.emit('newMessage', message);
     });
 
     socket.on('createLocationMessage', (location) => {
-        io.emit('newLocationMessage', new LocationMessage('Admin', location.latitude, location.longitude))
+        const user = users.get(socket.id);
+        if (user && isRealString(message.text)) {
+            io.to(user.room)
+                .emit('newLocationMessage', new LocationMessage(user.name, location.latitude, location.longitude))
+        }
     });
 
     socket.on('disconnect', () => {
