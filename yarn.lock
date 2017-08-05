@@ -466,6 +466,10 @@ negotiator@0.6.1:
   version "0.6.1"
   resolved "https://registry.yarnpkg.com/negotiator/-/negotiator-0.6.1.tgz#2b327184e8992101177b28563fb5e7102acd0ca9"
 
+"node-jquery-deparam@git://github.com/edwardsmit/node-jquery-deparam.git":
+  version "0.0.3"
+  resolved "git://github.com/edwardsmit/node-jquery-deparam.git#83551b425016f6fe41a3406623030e314ccd63cf"
+
 object-assign@~4.1.1:
   version "4.1.1"
   resolved "https://registry.yarnpkg.com/object-assign/-/object-assign-4.1.1.tgz#2109adc7965887cfc05cbbd442cac8bfbb360863"

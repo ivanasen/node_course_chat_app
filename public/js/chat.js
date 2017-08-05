@@ -1,15 +1,22 @@
 var socket = io();
 
 socket.on('connect', function () {
-    console.log('Connected to server');
-
+    let params = $.deparam(window.location.search);
+    socket.emit('join', params, function (err) {
+        if (err) {
+            alert(err);
+            window.location.href = '/';
+        } else {
+            console.log('No error');
+        }
+    });
 });
 
 socket.on('disconnect', function () {
     console.log('Disconnected from server');
 });
 
-// Vue.use(VueChatScroll);
+// Vue.use(vChatScroll);
 new Vue({
     el: '#chat',
     data: {
@@ -24,7 +31,7 @@ new Vue({
             self.messages.push(message);
         });
 
-        socket.on('newLocationMessage', function(message) {
+        socket.on('newLocationMessage', function (message) {
             message.createdAtFormatted = moment(message.createdAt).format('h:mm a');
             self.messages.push(message);
             self.isSendingLocation = false;
@@ -35,7 +42,7 @@ new Vue({
             if (this.messageInput.length === 0) {
                 return;
             }
-            
+
             socket.emit('createMessage', {
                 from: 'Frank',
                 text: this.messageInput
@@ -45,7 +52,7 @@ new Vue({
             this.messageInput = '';
         },
 
-        sendLocation() {            
+        sendLocation() {
             this.isSendingLocation = true;
             navigator.geolocation.getCurrentPosition(function (location) {
                 socket.emit('createLocationMessage', {
@@ -58,3 +65,18 @@ new Vue({
         }
     }
 });
+
+new Vue({
+    el: '#users',
+    data: {
+        users: []
+    },
+    mounted: function() {
+        var self = this;
+        socket.on('updateUserList', function (users) {
+            self.users = users;
+            console.log(users);
+        });
+        
+    }
+})
